@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Kakuyomu Reader Extension
-// @namespace    http://tampermonkey.net/
+// @namespace    https://github.com/fdophel/kakuyomu_reader_extension
 // @version      0.1
 // @description  Add several pager functions, ^v>.
-// @author       You
+// @author       fdophel
 // @match        https://kakuyomu.jp/works/*/episodes/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
 // @grant        none
@@ -12,19 +12,21 @@
 (function() {
     'use strict';
 
-    // Your code here...
     function createTool(tooltip_label, text) {
         const p = document.createElement('p');
         p.setAttribute('class', 'ui-tooltip ui-tooltip-bottom');
         p.setAttribute('data-ui-tooltip-label', tooltip_label);
+
         const button = document.createElement('button');
-        const span = document.createElement('span');
         button.setAttribute('type', 'button');
         button.setAttribute('class', 'ui-button-silent-wrapper');
-        span.setAttribute('class', 'ui-button-silent');
-        const textNode = document.createTextNode(text);
-        span.appendChild(textNode)
 
+        const span = document.createElement('span');
+        span.setAttribute('class', 'ui-button-silent');
+
+        const textNode = document.createTextNode(text);
+
+        span.appendChild(textNode)
         button.append(span);
         p.append(button);
         return p
