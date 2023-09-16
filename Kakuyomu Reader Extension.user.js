@@ -2,7 +2,7 @@
 // @name         Kakuyomu Reader Extension
 // @namespace    https://github.com/fdophel/kakuyomu_reader_extension
 // @version      0.1
-// @description  Add several pager functions, ^v>.
+// @description  Add several pager functions to Kakuyomu reader, <^v>.
 // @author       fdophel
 // @match        https://kakuyomu.jp/works/*/episodes/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=tampermonkey.net
@@ -33,18 +33,24 @@
     }
 
     const next_a = document.getElementById('contentMain-readNextEpisode');
+    const prev_div = document.getElementById('contentMain-previousEpisode');
+
     const tools = document.getElementById('worksEpisodesEpisodeHeader-tools');
     const first_tool = tools.firstElementChild;
 
-    const up_tool = createTool('go top', '↑');
+    const back_tool = createTool('previous page', '⬅');
+    back_tool.addEventListener("click", function(){ prev_div.firstElementChild.click(); });
+    tools.insertBefore(back_tool, first_tool);
+
+    const up_tool = createTool('go top', '⬆');
     up_tool.addEventListener("click", function(){ window.scrollTo(0, 0); });
     tools.insertBefore(up_tool, first_tool);
 
-    const down_tool = createTool('go bottom', '↓');
+    const down_tool = createTool('go bottom', '⬇');
     down_tool.addEventListener("click", function(){ window.scrollTo(0, document.body.scrollHeight); });
     tools.insertBefore(down_tool, first_tool);
 
-    const next_tool = createTool('next page', '→');
+    const next_tool = createTool('next page', '➡');
     next_tool.addEventListener("click", function(){ next_a.click(); });
     tools.insertBefore(next_tool, first_tool);
 })();
